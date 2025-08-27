@@ -5,7 +5,7 @@ function isBusinessHours() {
   const now = new Date();
   const day = now.getDay(); // 0 = Sunday
   const hour = now.getHours();
-  return day >= 1 && day <= 6 && hour >= 8 && hour < 22; // Mon-Sat, 08:00–22:00
+  return day >= 1 && day <= 6 && hour >= 7 && hour < 24; // Mon-Sat, 07:00–24:00
 }
 
 function getIsoDate() {

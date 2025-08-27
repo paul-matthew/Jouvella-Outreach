@@ -11,6 +11,7 @@ on:
 jobs:
   run-script:
     runs-on: ubuntu-latest
+    environment: .env 
 
     steps:
       - name: Checkout repo
@@ -24,6 +25,25 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run script
-        run: node main.js ${{ github.event.inputs.type }}
+      - name: Debug secrets
+        run: |
+          echo "GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY && '***SET***' || 'MISSING' }}"
+          echo "AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY && '***SET***' || 'MISSING' }}"
+          echo "AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID && '***SET***' || 'MISSING' }}"
+          echo "AIRTABLE_TABLE_NAME: ${{ secrets.AIRTABLE_TABLE_NAME && '***SET***' || 'MISSING' }}"
+          echo "GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID && '***SET***' || 'MISSING' }}"
+          echo "GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID && '***SET***' || 'MISSING' }}"
+          echo "GOOGLE_CLIENT_EMAIL: ${{ secrets.GOOGLE_CLIENT_EMAIL && '***SET***' || 'MISSING' }}"
+          echo "GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY && '***SET***' || 'MISSING' }}"
 
+      - name: Run script
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          AIRTABLE_TABLE_NAME: ${{ secrets.AIRTABLE_TABLE_NAME }}
+          GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
+          GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+          GOOGLE_CLIENT_EMAIL: ${{ secrets.GOOGLE_CLIENT_EMAIL }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+        run: node main.js ${{ github.event.inputs.type }}
