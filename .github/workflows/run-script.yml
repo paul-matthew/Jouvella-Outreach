@@ -27,14 +27,12 @@ jobs:
 
       - name: Debug secrets
         run: |
-          echo "GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY && '***SET***' || 'MISSING' }}"
           echo "AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY && '***SET***' || 'MISSING' }}"
           echo "AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID && '***SET***' || 'MISSING' }}"
           echo "AIRTABLE_TABLE_NAME: ${{ secrets.AIRTABLE_TABLE_NAME && '***SET***' || 'MISSING' }}"
-          echo "GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID && '***SET***' || 'MISSING' }}"
-          echo "GOOGLE_PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID && '***SET***' || 'MISSING' }}"
-          echo "GOOGLE_CLIENT_EMAIL: ${{ secrets.GOOGLE_CLIENT_EMAIL && '***SET***' || 'MISSING' }}"
-          echo "GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY && '***SET***' || 'MISSING' }}"
+          echo "GMAIL_USER: ${{ secrets.GMAIL_USER && '***SET***' || 'MISSING' }}"
+          echo "GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD && '***SET***' || 'MISSING' }}"
+
 
       - name: Run script
         env:
