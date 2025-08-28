@@ -46,6 +46,15 @@ export async function sendInitialEmail({ to, businessName, leadName }) {
       <a href="https://jouvella.netlify.app/" style="color: #0073e6; text-decoration: none;">Website</a>  | 
       <a href="www.linkedin.com/in/paul-matthew-5277b6305" style="color: #0073e6; text-decoration: none;">LinkedIn</a>
     </p>
+    <p style="text-align: left; margin-top: 20px;">
+      <img src="https://raw.githubusercontent.com/paul-matthew/jouvella/refs/heads/main/images/ogimage.png" 
+          alt="Jouvella Digital Logo" 
+          style="width:150px; max-width:100%; height:auto; display:block; margin: 0;">
+    </p>
+
+    <p style="text-align: left; font-style: italic; color: #555; margin-top: 5px;">
+      Your med spa’s growth, simplified.
+    </p>
       </body>
       </html>
     `,
@@ -63,7 +72,7 @@ export async function sendFollowUpEmail({ to, threadId, subject, businessName, l
     inReplyTo: threadId,  // ID of the previous message
     references: threadId, // ID of the previous message
     html: `
-      <div style="font-family: Arial, Helvetica, sans-serif; color:#333; line-height:1.5; max-width:600px; margin:0 auto; padding:10px;">
+      <div style="font-family: Arial, Helvetica, sans-serif; color:#333; line-height:1.5; max-width:600px; margin:0; padding:10px; text-align:left;">
         <p>Hi ${leadName} and Team,</p>
 
         <p>
@@ -83,7 +92,7 @@ export async function sendFollowUpEmail({ to, threadId, subject, businessName, l
         <p style="margin-top:20px;">
           Or watch a <strong>30-second intro video</strong> on our YouTube channel @Jouvella:
         </p>
-        <p style="margin:20px 0; text-align:center;">
+        <p style="margin:20px 0;">
           <a href="https://www.youtube.com/watch?v=xK10d4FgIgk" target="_blank" title="Watch 30s Intro Video">
             <img src="https://img.youtube.com/vi/xK10d4FgIgk/sddefault.jpg" 
                  alt="Watch 30s Intro Video" 
