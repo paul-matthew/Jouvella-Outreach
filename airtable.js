@@ -39,6 +39,7 @@ export async function getPendingLeads() {
         dateOfInitialOutreach: record.get("Date of Initial Outreach"),
         replied: record.get("Replied?"),
         threadId: record.get("Thread ID"),
+        emailcount: record.get("Email Count"),
       };
       console.log("➡️ Lead (initial):", data);
       return data;
@@ -162,25 +163,25 @@ export async function getLeadsNeedingFollowup() {
 }
 
 /**
- * Step 3: Fetch leads eligible for Temp (3rd) Follow-Up
+ * Step 3: Fetch leads eligible for 2nd (3rd) Follow-Up
  */
-export async function getLeadsNeedingTempFollowup() {
-  console.log("📡 Fetching leads needing TEMP follow-up...");
+export async function getLeadsNeeding2ndFollowup() {
+  console.log("📡 Fetching leads needing 2nd follow-up...");
   try {
     const formula = `
       AND(
         {Initial Email Sent} = 'Yes',
         {Replied?} != 'Yes',
-        OR({Cold Outreach Step} = 'Follow-up Sent', {Cold Outreach Step} = 'Temp Follow-up Sent'),
+        OR({Cold Outreach Step} = 'Follow-up Sent', {Cold Outreach Step} = '2nd Follow-up Sent'),
         DATETIME_DIFF(
           TODAY(),
           {Follow-Up Date},
           'days'
-        ) >= 10
+        ) >= 3
       )
     `.trim();
 
-    console.log("🔍 TEMP Follow-up filter:", formula);
+    console.log("🔍 2nd Follow-up filter:", formula);
 
     const records = await table
       .select({
@@ -189,7 +190,7 @@ export async function getLeadsNeedingTempFollowup() {
       })
       .all();
 
-    console.log(`✅ Found ${records.length} lead(s) for TEMP follow-up.`);
+    console.log(`✅ Found ${records.length} lead(s) for 2nd follow-up.`);
     return records.map((record) => ({
       id: record.id,
       email: record.get("Email"),
@@ -198,9 +199,10 @@ export async function getLeadsNeedingTempFollowup() {
       threadId: record.get("Thread ID"),
       followupdate: record.get("Follow-Up Date"),
       coldOutreachStep: record.get("Cold Outreach Step"),
+      emailcount: record.get("Email Count"),
     }));
   } catch (err) {
-    console.error("❌ Error fetching TEMP follow-up leads:", err);
+    console.error("❌ Error fetching 2nd follow-up leads:", err);
     throw err;
   }
 }

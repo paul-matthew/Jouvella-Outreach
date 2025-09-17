@@ -1,5 +1,5 @@
-import { getPendingLeads, getLeadsNeedingFollowup, getLeadsNeedingTempFollowup, updateRecord } from "./airtable.js";
-import { sendInitialEmail, sendFollowUpEmail,sendTempFollowUpEmail } from "./email.js";
+import { getPendingLeads, getLeadsNeedingFollowup, getLeadsNeeding2ndFollowup, updateRecord } from "./airtable.js";
+import { sendInitialEmail, sendFollowUpEmail,send2ndFollowUpEmail } from "./email.js";
 
 function isBusinessHours() {
   const now = new Date();
@@ -45,6 +45,7 @@ async function runOutreach() {
         "Date of Initial Outreach": today,
         "Thread ID": emailResponse.messageId || "(no messageId)",
         "Initial Email Sent": "Yes",
+        "Email Count":1
       });
 
       console.log(`✅ Initial sent to ${lead.businessName}`);
@@ -98,6 +99,7 @@ async function runFollowup() {
         "Replied?": "No",
         "Ready For Follow-up Email": true,
         "Follow-Up Date": today,
+        "Email Count": 2
       });
 
       console.log(`✅ Follow-up sent to ${lead.businessName}`);
@@ -113,17 +115,16 @@ async function runFollowup() {
 }
 
 /** Workflow 3: Follow-Up2 Outreach */
-//TEMP to send the new email
-async function runTempFollowup() {
-  console.log("📩 Starting Temp Follow-Up workflow...");
+async function run2ndFollowup() {
+  console.log("📩 Starting 2nd Follow-Up workflow...");
   if (!isBusinessHours()) {
     console.log("⏸ Not within business hours, skipping.");
     return;
   }
 
-  console.log("📡 Fetching leads needing temp follow-up from Airtable...");
-  const leads = await getLeadsNeedingTempFollowup();
-  console.log(`✅ Found ${leads.length} lead(s) to check for temp follow-up.`);
+  console.log("📡 Fetching leads needing 2nd follow-up from Airtable...");
+  const leads = await getLeadsNeeding2ndFollowup();
+  console.log(`✅ Found ${leads.length} lead(s) to check for 2nd follow-up.`);
 
   if (leads.length === 0) {
     console.log("ℹ️ No leads found, exiting.");
@@ -136,7 +137,7 @@ async function runTempFollowup() {
     console.log(`\n➡️ [${index + 1}/${leads.length}] Checking: ${lead.businessName} <${lead.email}>`);
 
     try {
-      // Only send temp follow-up if last follow-up was more than 10 days ago
+      // Only send 2nd follow-up if last follow-up was more than 3 days ago
       console.log("DEBUG followupdate field raw value:", lead.followupdate);
 
       if (lead.followupdate) {
@@ -144,10 +145,10 @@ async function runTempFollowup() {
         const now = new Date(today);
         const diffDays = Math.floor((now - followUpDate) / (1000 * 60 * 60 * 24));
 
-        if (diffDays > 10) {
-          console.log(`📅 Last follow-up was ${diffDays} days ago → sending TEMP follow-up email...`);
+        if (diffDays > 3 && lead.emailcount==2) {
+          console.log(`📅 Last follow-up was ${diffDays} days ago → sending 2nd follow-up email...`);
 
-          const emailResponse = await sendTempFollowUpEmail({
+          const emailResponse = await send2ndFollowUpEmail({
             to: lead.email,
             businessName: lead.businessName,
             leadName: lead.leadName,
@@ -158,9 +159,10 @@ async function runTempFollowup() {
           await updateRecord(lead.id, {
             "Replied?": "No",
             "Follow-Up Date": today, // update with this latest send date
+            "Email Count":3,
           });
 
-          console.log(`✅ Temp follow-up sent to ${lead.businessName}`);
+          console.log(`✅ 2nd follow-up sent to ${lead.businessName}`);
         } else {
           console.log(`⏭️ Last follow-up was only ${diffDays} days ago → skipping ${lead.businessName}`);
         }
@@ -168,14 +170,14 @@ async function runTempFollowup() {
         console.log(`ℹ️ No "followupdate" found for ${lead.businessName}, skipping.`);
       }
     } catch (err) {
-      console.error(`❌ Error sending temp follow-up to ${lead.email}:`, err?.message || err);
+      console.error(`❌ Error sending 2nd follow-up to ${lead.email}:`, err?.message || err);
       await updateRecord(lead.id, {
         "Follow-Up Date": "",
       });
     }
   }
 
-  console.log("\n🎉 Temp Follow-Up workflow complete.");
+  console.log("\n🎉 2nd Follow-Up workflow complete.");
 }
 
 
@@ -188,7 +190,7 @@ if (mode === "outreach") {
 } else if (mode === "followup") {
   runFollowup();
   } else if (mode === "followup2") {
-  runTempFollowup();
+  run2ndFollowup();
 
 } else {
   console.log("⚠️ Please specify a workflow: outreach or followup");

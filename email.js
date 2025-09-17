@@ -137,7 +137,7 @@ export async function sendFollowUpEmail({ to, threadId, businessName, leadName }
   return info;
 }
 
-export async function sendTempFollowUpEmail({ to, threadId, businessName, leadName }) {
+export async function send2ndFollowUpEmail({ to, threadId, businessName, leadName }) {
   const mailOptions = {
     from: `"Paul Matthew | Jouvella Digital" <${process.env.GMAIL_USER}>`,
     to,
