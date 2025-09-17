@@ -1,11 +1,11 @@
-import { getPendingLeads, getLeadsNeedingFollowup, updateRecord } from "./airtable.js";
-import { sendInitialEmail, sendFollowUpEmail } from "./email.js";
+import { getPendingLeads, getLeadsNeedingFollowup, getLeadsNeedingTempFollowup, updateRecord } from "./airtable.js";
+import { sendInitialEmail, sendFollowUpEmail,sendTempFollowUpEmail } from "./email.js";
 
 function isBusinessHours() {
   const now = new Date();
   const day = now.getDay(); // 0 = Sunday
   const hour = now.getHours();
-  return day >= 1 && day <= 6 && hour >= 7 && hour < 18; // Mon-Sat, 07:00–18:00
+  return day >= 1 && day <= 6 && hour >= 7 && hour < 28; // Mon-Sat, 07:00–18:00
 }
 
 function getIsoDate() {
@@ -112,6 +112,74 @@ async function runFollowup() {
   console.log("\n🎉 Follow-Up workflow complete.");
 }
 
+/** Workflow 3: Follow-Up2 Outreach */
+//TEMP to send the new email
+async function runTempFollowup() {
+  console.log("📩 Starting Temp Follow-Up workflow...");
+  if (!isBusinessHours()) {
+    console.log("⏸ Not within business hours, skipping.");
+    return;
+  }
+
+  console.log("📡 Fetching leads needing temp follow-up from Airtable...");
+  const leads = await getLeadsNeedingTempFollowup();
+  console.log(`✅ Found ${leads.length} lead(s) to check for temp follow-up.`);
+
+  if (leads.length === 0) {
+    console.log("ℹ️ No leads found, exiting.");
+    return;
+  }
+
+  const today = getIsoDate();
+
+  for (const [index, lead] of leads.entries()) {
+    console.log(`\n➡️ [${index + 1}/${leads.length}] Checking: ${lead.businessName} <${lead.email}>`);
+
+    try {
+      // Only send temp follow-up if last follow-up was more than 10 days ago
+      console.log("DEBUG followupdate field raw value:", lead.followupdate);
+
+      if (lead.followupdate) {
+        const followUpDate = new Date(lead.followupdate);
+        const now = new Date(today);
+        const diffDays = Math.floor((now - followUpDate) / (1000 * 60 * 60 * 24));
+
+        if (diffDays > 10) {
+          console.log(`📅 Last follow-up was ${diffDays} days ago → sending TEMP follow-up email...`);
+
+          const emailResponse = await sendTempFollowUpEmail({
+            to: lead.email,
+            businessName: lead.businessName,
+            leadName: lead.leadName,
+            threadId: lead.threadId,
+            subject: lead.originalSubject || `Fill more treatment slots`, // fallback
+          });
+
+          await updateRecord(lead.id, {
+            "Replied?": "No",
+            "Follow-Up Date": today, // update with this latest send date
+          });
+
+          console.log(`✅ Temp follow-up sent to ${lead.businessName}`);
+        } else {
+          console.log(`⏭️ Last follow-up was only ${diffDays} days ago → skipping ${lead.businessName}`);
+        }
+      } else {
+        console.log(`ℹ️ No "followupdate" found for ${lead.businessName}, skipping.`);
+      }
+    } catch (err) {
+      console.error(`❌ Error sending temp follow-up to ${lead.email}:`, err?.message || err);
+      await updateRecord(lead.id, {
+        "Follow-Up Date": "",
+      });
+    }
+  }
+
+  console.log("\n🎉 Temp Follow-Up workflow complete.");
+}
+
+
+
 
 // Run one workflow at a time: `node main.js outreach` or `node main.js followup`
 const mode = process.argv[2];
@@ -119,6 +187,9 @@ if (mode === "outreach") {
   runOutreach();
 } else if (mode === "followup") {
   runFollowup();
+  } else if (mode === "followup2") {
+  runTempFollowup();
+
 } else {
   console.log("⚠️ Please specify a workflow: outreach or followup");
 }

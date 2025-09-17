@@ -162,6 +162,51 @@ export async function getLeadsNeedingFollowup() {
 }
 
 /**
+ * Step 3: Fetch leads eligible for Temp (3rd) Follow-Up
+ */
+export async function getLeadsNeedingTempFollowup() {
+  console.log("📡 Fetching leads needing TEMP follow-up...");
+  try {
+    const formula = `
+      AND(
+        {Initial Email Sent} = 'Yes',
+        {Replied?} != 'Yes',
+        OR({Cold Outreach Step} = 'Follow-up Sent', {Cold Outreach Step} = 'Temp Follow-up Sent'),
+        DATETIME_DIFF(
+          TODAY(),
+          {Follow-Up Date},
+          'days'
+        ) >= 10
+      )
+    `.trim();
+
+    console.log("🔍 TEMP Follow-up filter:", formula);
+
+    const records = await table
+      .select({
+        filterByFormula: formula,
+        maxRecords: 50,
+      })
+      .all();
+
+    console.log(`✅ Found ${records.length} lead(s) for TEMP follow-up.`);
+    return records.map((record) => ({
+      id: record.id,
+      email: record.get("Email"),
+      businessName: record.get("Business Name"),
+      leadName: record.get("Lead Name"),
+      threadId: record.get("Thread ID"),
+      followupdate: record.get("Follow-Up Date"),
+      coldOutreachStep: record.get("Cold Outreach Step"),
+    }));
+  } catch (err) {
+    console.error("❌ Error fetching TEMP follow-up leads:", err);
+    throw err;
+  }
+}
+
+
+/**
  * Utility: Update record in Airtable
  */
 export async function updateRecord(id, updates) {
