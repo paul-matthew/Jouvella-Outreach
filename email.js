@@ -30,7 +30,7 @@ export async function sendInitialEmail({ to, businessName, leadName }) {
         <p>Here’s a quick demo so you can see it in action:</p>
 
         <p>
-          <a href="Demo Link" 
+          <a href="https://adjoaglow.framer.website/" 
              style="display:inline-block; padding:12px 20px; background:#0073e6; color:#fff; text-decoration:none; border-radius:6px; font-weight:bold;">
             View Demo
           </a>
