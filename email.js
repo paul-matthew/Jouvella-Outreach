@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD, // must be an App Password, not your real Gmail password
+    pass: process.env.GMAIL_APP_PASSWORD,
   },
 });
 
@@ -21,11 +21,11 @@ export async function sendInitialEmail({ to, businessName, leadName }) {
         
         <p>Hi ${leadName} and Team,</p>
 
-        <p>My name is <strong>Paul Matthew</strong>, and I help med spas like <strong>${businessName}</strong> get more bookings without adding extra staff.</p>
+        <p>My name is <strong>Paul Matthew</strong>, and I help med spas like <strong>${businessName}</strong> get more bookings, reduce admin workload, and improve client retention.</p>
 
-        <p>Most med spas already have a website, but very few are built to <strong>turn visitors into booked appointments automatically</strong>.</p>
+        <p>Most med spas already have a website, but very few are designed to <strong>convert visitors into booked appointments automatically</strong> using automation and follow-up systems.</p>
 
-        <p>We provide a ready to launch solution that integrates with your existing branding and booking system. Most clients are live within a week.</p>
+        <p>We provide a ready-to-launch growth system that integrates with your existing website and booking setup. Optional AI chat can also be added for extra lead capture.</p>
 
         <p>Here’s a quick demo so you can see it in action:</p>
 
@@ -84,9 +84,9 @@ export async function sendFollowUpEmail({ to, threadId, businessName, leadName }
       <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
         <p>Hi ${leadName},</p>
 
-        <p>Just following up — many med spas already have websites, but very few are designed to <strong>turn visitors into booked appointments automatically</strong>.</p>
+        <p>Following up — many med spas already have websites, but very few are designed to <strong>automate bookings, follow-ups, and lead capture</strong>.</p>
 
-        <p>Here’s a quick demo and a <strong>30-second video</strong> showing how it works:</p>
+        <p>Here’s a quick demo and a <strong>30-second video</strong> showing how our systems work:</p>
 
         <p>
           <a href="https://adjoaglow.framer.website/" 
@@ -100,13 +100,13 @@ export async function sendFollowUpEmail({ to, threadId, businessName, leadName }
         </p>
 
         <p style="font-size:12px; color:#555;">
-          You can also verify the domains directly:<br>
+          Verify links directly:<br>
           Demo: <a href="https://adjoaglow.framer.website/">https://adjoaglow.framer.website/</a><br>
           Video: <a href="https://www.youtube.com/watch?v=xK10d4FgIgk">https://www.youtube.com/watch?v=xK10d4FgIgk</a>
         </p>
 
         <p style="font-weight:bold; font-size:16px; margin-top:20px;">
-          Would you like to schedule a quick 10-minute call to see if this could work for <strong>${businessName}</strong>, or should I send pricing?
+          Would you like to schedule a short 10-minute call to see if this could work for <strong>${businessName}</strong>, or should I send over pricing?
         </p>
 
         <hr style="border:0; border-top:1px solid #ccc; margin:20px 0;">
@@ -127,7 +127,7 @@ export async function sendFollowUpEmail({ to, threadId, businessName, leadName }
         </p>
 
         <p style="font-style:italic; color:#555; font-size:12px; margin-top:10px;">
-          You’re receiving this email because we provide services for med spas. No attachments included; all links are safe to click.
+          You’re receiving this email because we provide systems-first growth services for med spas. Links are safe to click; no attachments included.
         </p>
       </div>
     `,
@@ -136,6 +136,7 @@ export async function sendFollowUpEmail({ to, threadId, businessName, leadName }
   const info = await transporter.sendMail(mailOptions);
   return info;
 }
+
 
 export async function send2ndFollowUpEmail({ to, threadId, businessName, leadName }) {
   const mailOptions = {
@@ -148,9 +149,9 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
       <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
         <p>Hi ${leadName},</p>
 
-        <p>Just wanted to make sure you saw this — med spas using our websites often see a noticeable increase in booked appointments because the sites are designed to <strong>convert visitors effortlessly</strong>.</p>
+        <p>Just checking in — med spas using our growth systems often see a noticeable increase in booked appointments because the tools are designed to <strong>automate client follow-ups and capture leads effortlessly</strong>.</p>
 
-        <p>Here’s the demo and a short <strong>30-second video</strong> explaining it:</p>
+        <p>Here’s the demo and a short <strong>30-second video</strong> explaining how it works:</p>
 
         <p>
           <a href="https://adjoaglow.framer.website/" 
@@ -164,13 +165,13 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
         </p>
 
         <p style="font-size:12px; color:#555;">
-          Verify the links here:<br>
+          Verify links directly:<br>
           Demo: <a href="https://adjoaglow.framer.website/">https://adjoaglow.framer.website/</a><br>
           Video: <a href="https://www.youtube.com/watch?v=xK10d4FgIgk">https://www.youtube.com/watch?v=xK10d4FgIgk</a>
         </p>
 
         <p style="font-weight:bold; font-size:16px; margin-top:20px;">
-          I can send a one-page overview with pricing and next steps — would you like me to?
+          I can send a one-page overview with pricing and optional AI/chat add-ons — would you like me to?
         </p>
 
         <hr style="border:0; border-top:1px solid #ccc; margin:20px 0;">
@@ -191,7 +192,7 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
         </p>
 
         <p style="font-style:italic; color:#555; font-size:12px; margin-top:10px;">
-          You’re receiving this email because we provide services for med spas. No attachments included; all links are safe to click.
+          You’re receiving this email because we provide systems-first growth services for med spas. Links are safe to click; no attachments included.
         </p>
       </div>
     `,
@@ -200,6 +201,7 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
   const info = await transporter.sendMail(mailOptions);
   return info;
 }
+
 
 
 
