@@ -1,4 +1,4 @@
-import { getPendingLeads, getLeadsNeedingFollowup, getLeadsNeeding2ndFollowup, updateRecord } from "./airtable2026.js";
+import { getPendingLeads, getLeadsNeedingFollowup, getLeadsNeeding2ndFollowup, updateRecord } from "./airtable.js";
 import { sendInitialEmail, sendFollowUpEmail,send2ndFollowUpEmail } from "./email.js";
 
 function isBusinessHours() {
