@@ -33,5 +33,5 @@ jobs:
           AIRTABLE_TABLE_NAME: ${{ secrets.AIRTABLE_TABLE_NAME }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-        run: node main.js ${{ github.event.inputs.type }}
+        run: node main2026.js ${{ github.event.inputs.type }}
 
