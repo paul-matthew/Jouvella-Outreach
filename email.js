@@ -16,56 +16,82 @@ export async function sendInitialEmail({ to, businessName, leadName }) {
     from: `"Paul Matthew | Jouvella Digital" <${process.env.GMAIL_USER}>`,
     to,
     subject: `Quick question about ${businessName}`,
-    html: `
-      <div style="font-family: Arial, sans-serif; color:#333; line-height:1.6; max-width:600px; padding:10px;">
-        
-        <p>Hi ${leadName} and Team,</p>
+html: `
+  <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
+    <p>Hi ${leadName},</p>
 
-        <p>My name is <strong>Paul Matthew</strong>, and I help med spas like <strong>${businessName}</strong> get more bookings, reduce admin workload, and improve client retention.</p>
+    <p>
+      Happy New Year🎉
+    </p>
 
-        <p>Most med spas already have a website, but very few are designed to <strong>convert visitors into booked appointments automatically</strong> using automation and follow-up systems.</p>
+    <p>
+      If someone reaches out but doesn’t book right away, do you ever hear from them again?
+    </p>
 
-        <p>We provide a ready-to-launch growth system that integrates with your existing website and booking setup. Optional AI chat can also be added for extra lead capture.</p>
+    <p>
+      Most med spas lose revenue because interested people never get turned into booked or returning clients.
+    </p>
 
-        <p>Here’s a quick demo so you can see it in action:</p>
+    <p>
+      That’s what we install: simple automated follow-ups and rebooking, 
+      <strong>without changing your website or booking software</strong>.
+    </p>
 
-        <p>
-          <a href="https://adjoaglow.framer.website/" 
-             style="display:inline-block; padding:12px 20px; background:#0073e6; color:#fff; text-decoration:none; border-radius:6px; font-weight:bold;">
-            View Demo
-          </a>
-        </p>
+    <p style="margin:16px 0 8px;">
+      👉 <strong>Here's a 30-second demo of the problem we fix.</strong>
+    </p>
 
-        <p style="font-size:12px; color:#555; margin-top:5px;">
-          Links are secure and lead directly to our demo site.
-        </p>
+    <p>
+      <a href="https://adjoaglow.framer.website/"
+        style="display:inline-block; padding:10px 16px; background:#0073e6; color:#fff; text-decoration:none; border-radius:5px; font-weight:bold;">
+        View Demo
+      </a>
+    </p>
 
-        <p style="margin-top:20px; font-weight:bold; font-size:16px;">
-          Would you like me to share pricing and details for how this could work for <strong>${businessName}</strong>?
-        </p>
+    <p>
+      I’m accepting <strong>2 new med spa clients this month</strong>.
+    </p>
 
-        <hr style="border:0; border-top:1px solid #ccc; margin:25px 0;">
+    <p>
+      Happy to show what this could look like for <strong>${businessName}</strong>.
+    </p>
 
-        <p style="font-size:14px; line-height:1.5;">
-          <strong>Best regards,</strong><br>
-          Paul Matthew<br>
-          Project Manager | Jouvella Digital<br>
-          <a href="mailto:jouvelladigital@gmail.com" style="color:#0073e6;">Email</a> | 
-          <a href="https://jouvella.netlify.app/" style="color:#0073e6;">Website</a> | 
-          <a href="https://www.linkedin.com/in/paul-matthew-5277b6305" style="color:#0073e6;">LinkedIn</a>
-        </p>
+    <div style="display:flex; align-items:center; font-family:Arial, sans-serif; font-size:12px; color:#666; line-height:1.4; margin-top:16px;">
+      
+      <!-- Profile Image -->
+      <img
+        src="https://jouvella.netlify.app/images/PM.jpeg"
+        alt="Paul Matthew"
+        width="60"
+        height="60"
+        style="border-radius:50%; margin-right:12px; object-fit:cover;"
+      />
 
-        <p style="text-align:left; margin-top:20px;">
-          <img src="https://raw.githubusercontent.com/paul-matthew/jouvella/refs/heads/main/images/ogimage.png" 
-               alt="Jouvella Digital Logo" 
-               style="width:150px; height:auto; display:block;">
-        </p>
+      <!-- Text Content -->
+      <div>
+        <strong style="font-size:13px; color:#333;">Paul Matthew</strong><br>
+        Project Manager | Jouvella Digital<br><br>
 
-        <p style="font-style:italic; color:#555; font-size:12px; margin-top:10px;">
-          Your med spa’s growth, simplified.
-        </p>
+        📧 <a href="mailto:jouvelladigital@gmail.com" style="color:#666; text-decoration:none;">
+          jouvelladigital@gmail.com
+        </a><br>
+
+        🌐 <a href="https://jouvella.netlify.app" style="color:#666; text-decoration:none;">
+          jouvelladigital.com
+        </a><br>
+
+        🔗 <a href="www.linkedin.com/in/paul-matthew-5277b6305"
+              style="color:#666; text-decoration:none;">
+          LinkedIn
+        </a><br><br>
+
+        <em>Your med spa’s growth, simplified.</em>
       </div>
-    `,
+    </div>
+
+  </div>
+`
+
   };
 
   const info = await transporter.sendMail(mailOptions);
@@ -77,60 +103,71 @@ export async function sendFollowUpEmail({ to, threadId, businessName, leadName }
   const mailOptions = {
     from: `"Paul Matthew | Jouvella Digital" <${process.env.GMAIL_USER}>`,
     to,
-    subject: `Quick follow-up: ${businessName}`,
+    // subject: `Following up on my note below`,
     inReplyTo: threadId,
-    references: threadId,
-    html: `
-      <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
-        <p>Hi ${leadName},</p>
+    references: [threadId],
+    subject: `Re: Quick question about ${businessName}`,  
+html: `
+  <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
+    <p>Hi ${leadName},</p>
 
-        <p>Following up — many med spas already have websites, but very few are designed to <strong>automate bookings, follow-ups, and lead capture</strong>.</p>
+    <p>Just checking back in.</p>
 
-        <p>Here’s a quick demo and a <strong>30-second video</strong> showing how our systems work:</p>
+    <p>
+      A lot of clinics get inquiries or bookings, but don’t have a system that 
+      <strong>follows up, rebooks, and re-engages clients automatically</strong>.
+    </p>
 
-        <p>
-          <a href="https://adjoaglow.framer.website/" 
-             style="display:inline-block; padding:12px 20px; background:#0073e6; color:#fff; text-decoration:none; border-radius:6px; font-weight:bold; margin-right:10px;">
-            View Demo
-          </a>
-          <a href="https://www.youtube.com/watch?v=xK10d4FgIgk" 
-             style="display:inline-block; padding:12px 20px; background:#ff0000; color:#fff; text-decoration:none; border-radius:6px; font-weight:bold;">
-            Watch Video
-          </a>
-        </p>
+    <p>
+      Here's a 30-second showing the gap most med spas don’t see.
+    </p>
 
-        <p style="font-size:12px; color:#555;">
-          Verify links directly:<br>
-          Demo: <a href="https://adjoaglow.framer.website/">https://adjoaglow.framer.website/</a><br>
-          Video: <a href="https://www.youtube.com/watch?v=xK10d4FgIgk">https://www.youtube.com/watch?v=xK10d4FgIgk</a>
-        </p>
+    <p>
+      <a href="https://adjoaglow.framer.website/"
+        style="display:inline-block; padding:10px 16px; background:#0073e6; color:#fff; text-decoration:none; border-radius:5px; font-weight:bold;">
+        View 30-Second Demo
+      </a>
+    </p>
 
-        <p style="font-weight:bold; font-size:16px; margin-top:20px;">
-          Would you like to schedule a short 10-minute call to see if this could work for <strong>${businessName}</strong>, or should I send over pricing?
-        </p>
+    <p>
+      If it’s relevant, I can send a one-page overview with pricing and real examples.
+    </p>
 
-        <hr style="border:0; border-top:1px solid #ccc; margin:20px 0;">
+    <div style="display:flex; align-items:center; font-family:Arial, sans-serif; font-size:12px; color:#666; line-height:1.4; margin-top:16px;">
+      
+      <!-- Profile Image -->
+      <img
+        src="https://jouvella.netlify.app/images/PM.jpeg"
+        alt="Paul Matthew"
+        width="60"
+        height="60"
+        style="border-radius:50%; margin-right:12px; object-fit:cover;"
+      />
 
-        <p style="font-size:14px;">
-          <strong>Best regards,</strong><br>
-          Paul Matthew<br>
-          Project Manager | Jouvella Digital<br>
-          <a href="mailto:jouvelladigital@gmail.com" style="color:#0073e6;">Email</a> | 
-          <a href="https://jouvella.netlify.app/" style="color:#0073e6;">Website</a> | 
-          <a href="https://www.linkedin.com/in/paul-matthew-5277b6305" style="color:#0073e6;">LinkedIn</a>
-        </p>
+      <!-- Text Content -->
+      <div>
+        <strong style="font-size:13px; color:#333;">Paul Matthew</strong><br>
+        Project Manager | Jouvella Digital<br><br>
 
-        <p style="text-align:left; margin-top:20px;">
-          <img src="https://raw.githubusercontent.com/paul-matthew/jouvella/refs/heads/main/images/ogimage.png" 
-               alt="Jouvella Digital Logo" 
-               style="width:150px; height:auto; display:block;">
-        </p>
+        📧 <a href="mailto:jouvelladigital@gmail.com" style="color:#666; text-decoration:none;">
+          jouvelladigital@gmail.com
+        </a><br>
 
-        <p style="font-style:italic; color:#555; font-size:12px; margin-top:10px;">
-          You’re receiving this email because we provide systems-first growth services for med spas. Links are safe to click; no attachments included.
-        </p>
+        🌐 <a href="https://jouvella.netlify.app" style="color:#666; text-decoration:none;">
+          jouvelladigital.com
+        </a><br>
+
+        🔗 <a href="www.linkedin.com/in/paul-matthew-5277b6305"
+              style="color:#666; text-decoration:none;">
+          LinkedIn
+        </a><br><br>
+
+        <em>Your med spa’s growth, simplified.</em>
       </div>
-    `,
+    </div>
+  </div>
+  `
+
   };
 
   const info = await transporter.sendMail(mailOptions);
@@ -142,60 +179,59 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
   const mailOptions = {
     from: `"Paul Matthew | Jouvella Digital" <${process.env.GMAIL_USER}>`,
     to,
-    subject: `Quick peek: boost bookings at ${businessName}`,
+    // subject: `Should I close the loop?`,
     inReplyTo: threadId,
-    references: threadId,
-    html: `
-      <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
-        <p>Hi ${leadName},</p>
+    subject: `Re: Quick question about ${businessName}`,
+    inReplyTo: threadId,
+    references: [threadId],
+  html: `
+  <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
+    <p>Hi ${leadName},</p>
 
-        <p>Just checking in — med spas using our growth systems often see a noticeable increase in booked appointments because the tools are designed to <strong>automate client follow-ups and capture leads effortlessly</strong>.</p>
+    <p>I haven't heard back, so I'll pause outreach on my end.</p>
 
-        <p>Here’s the demo and a short <strong>30-second video</strong> explaining how it works:</p>
+    <p><strong> If improving inquiry follow-ups or reducing manual admin</strong> isn’t a focus right now, totally understand.</p>
 
-        <p>
-          <a href="https://adjoaglow.framer.website/" 
-             style="display:inline-block; padding:12px 20px; background:#0073e6; color:#fff; text-decoration:none; border-radius:6px; font-weight:bold; margin-right:10px;">
-            View Demo
-          </a>
-          <a href="https://www.youtube.com/watch?v=xK10d4FgIgk" 
-             style="display:inline-block; padding:12px 20px; background:#ff0000; color:#fff; text-decoration:none; border-radius:6px; font-weight:bold;">
-            Watch Video
-          </a>
-        </p>
+    <p>If it is, I’m happy to share how this works for clinics with different booking or send pricing.</p>
 
-        <p style="font-size:12px; color:#555;">
-          Verify links directly:<br>
-          Demo: <a href="https://adjoaglow.framer.website/">https://adjoaglow.framer.website/</a><br>
-          Video: <a href="https://www.youtube.com/watch?v=xK10d4FgIgk">https://www.youtube.com/watch?v=xK10d4FgIgk</a>
-        </p>
+    <p>Thanks either way<p>
 
-        <p style="font-weight:bold; font-size:16px; margin-top:20px;">
-          I can send a one-page overview with pricing and optional AI/chat add-ons — would you like me to?
-        </p>
+    <div style="display:flex; align-items:center; font-family:Arial, sans-serif; font-size:12px; color:#666; line-height:1.4; margin-top:16px;">
+      
+      <!-- Profile Image -->
+      <img
+        src="https://jouvella.netlify.app/images/PM.jpeg"
+        alt="Paul Matthew"
+        width="60"
+        height="60"
+        style="border-radius:50%; margin-right:12px; object-fit:cover;"
+      />
 
-        <hr style="border:0; border-top:1px solid #ccc; margin:20px 0;">
+      <!-- Text Content -->
+      <div>
+        <strong style="font-size:13px; color:#333;">Paul Matthew</strong><br>
+        Project Manager | Jouvella Digital<br><br>
 
-        <p style="font-size:14px;">
-          <strong>Best regards,</strong><br>
-          Paul Matthew<br>
-          Project Manager | Jouvella Digital<br>
-          <a href="mailto:jouvelladigital@gmail.com" style="color:#0073e6;">Email</a> | 
-          <a href="https://jouvella.netlify.app/" style="color:#0073e6;">Website</a> | 
-          <a href="https://www.linkedin.com/in/paul-matthew-5277b6305" style="color:#0073e6;">LinkedIn</a>
-        </p>
+        📧 <a href="mailto:jouvelladigital@gmail.com" style="color:#666; text-decoration:none;">
+          jouvelladigital@gmail.com
+        </a><br>
 
-        <p style="text-align:left; margin-top:20px;">
-          <img src="https://raw.githubusercontent.com/paul-matthew/jouvella/refs/heads/main/images/ogimage.png" 
-               alt="Jouvella Digital Logo" 
-               style="width:150px; height:auto; display:block;">
-        </p>
+        🌐 <a href="https://jouvella.netlify.app" style="color:#666; text-decoration:none;">
+          jouvelladigital.com
+        </a><br>
 
-        <p style="font-style:italic; color:#555; font-size:12px; margin-top:10px;">
-          You’re receiving this email because we provide systems-first growth services for med spas. Links are safe to click; no attachments included.
-        </p>
+        🔗 <a href="www.linkedin.com/in/paul-matthew-5277b6305"
+              style="color:#666; text-decoration:none;">
+          LinkedIn
+        </a><br><br>
+
+        <em>Your med spa’s growth, simplified.</em>
       </div>
-    `,
+    </div>
+  </div>
+`
+
+
   };
 
   const info = await transporter.sendMail(mailOptions);
