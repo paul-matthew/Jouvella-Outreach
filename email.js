@@ -42,9 +42,16 @@ html: `
     </p>
 
     <p style="font-size:14px;">
-      https://www.youtube.com/watch?v=zLSM5IDC_X0  
+      <a
+        href="https://jouvella-automations.netlify.app/.netlify/functions/click?id=${record.id}"
+        target="_blank"
+      >
+        https://www.youtube.com/watch?v=zLSM5IDC_X0
+      </a>
       <br>
-      <span style="color:#777;">(30 seconds, or search "Jouvella Automated Systems" on YouTube)</span>
+      <span style="color:#777;">
+        (30 seconds, or search "Jouvella Automated Systems" on YouTube)
+      </span>
     </p>
 
     <p>
