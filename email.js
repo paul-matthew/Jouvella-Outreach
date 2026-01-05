@@ -216,8 +216,8 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
     <p>I haven’t heard back, so I’ll pause outreach on my end.</p>
 
     <p>
-    I work with med spas to add simple automation around their existing website or booking software, 
-    mainly to follow up with inquiries, re-engage past clients, and reduce manual admin.
+    I work with med spas to add <strong>simple automation</strong> around their existing website or booking software, 
+    mainly to <strong>follow up with inquiries, re-engage past clients, and reduce manual admin</strong>.
     </p>
 
     <p>
