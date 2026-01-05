@@ -112,7 +112,7 @@ export async function sendInitialEmail({ to, businessName, leadName, id }) {
 }
 
 
-export async function sendFollowUpEmail({ to, threadId, businessName, leadName }) {
+export async function sendFollowUpEmail({ to, threadId, businessName, leadName, id }) {
   const mailOptions = {
     from: `"Paul Matthew | Jouvella Digital" <${process.env.GMAIL_USER}>`,
     to,
@@ -201,7 +201,7 @@ html: `
 }
 
 
-export async function send2ndFollowUpEmail({ to, threadId, businessName, leadName }) {
+export async function send2ndFollowUpEmail({ to, threadId, businessName, leadName,id }) {
   const mailOptions = {
     from: `"Paul Matthew | Jouvella Digital" <${process.env.GMAIL_USER}>`,
     to,
