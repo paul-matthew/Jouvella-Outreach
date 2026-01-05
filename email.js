@@ -33,19 +33,18 @@ html: `
     </p>
 
     <p>
-      That’s what we install: simple automated follow-ups and rebooking, 
-      <strong>without changing your website or booking software</strong>.
+      That’s what we install: <strong>simple automated follow-ups, reminders, promotions alerts and much more</strong>. 
+      Our services are designed to be integrated into your existing website or booking software.
     </p>
 
     <p style="margin:16px 0 8px;">
-      👉 <strong>Here's a 30-second demo of the problem we fix.</strong>
+      Here’s a short demo highlighting the gap we commonly see in med spas:
     </p>
 
-    <p>
-      <a href="https://adjoaglow.framer.website/"
-        style="display:inline-block; padding:10px 16px; background:#0073e6; color:#fff; text-decoration:none; border-radius:5px; font-weight:bold;">
-        View Demo
-      </a>
+    <p style="font-size:14px;">
+      https://www.youtube.com/watch?v=zLSM5IDC_X0  
+      <br>
+      <span style="color:#777;">(30 seconds, or search "Jouvella Automated Systems" on YouTube)</span>
     </p>
 
     <p>
@@ -80,7 +79,7 @@ html: `
           jouvelladigital.com
         </a><br>
 
-        🔗 <a href="www.linkedin.com/in/paul-matthew-5277b6305"
+        🔗 <a href="https://www.linkedin.com/in/paul-matthew-5277b6305"
               style="color:#666; text-decoration:none;">
           LinkedIn
         </a><br><br>
@@ -118,15 +117,14 @@ html: `
       <strong>follows up, rebooks, and re-engages clients automatically</strong>.
     </p>
 
-    <p>
-      Here's a 30-second showing the gap most med spas don’t see.
+    <p style="margin:16px 0 8px;">
+      Here’s a short demo further identifying the gap we find with most med spa businesses:
     </p>
 
-    <p>
-      <a href="https://adjoaglow.framer.website/"
-        style="display:inline-block; padding:10px 16px; background:#0073e6; color:#fff; text-decoration:none; border-radius:5px; font-weight:bold;">
-        View 30-Second Demo
-      </a>
+    <p style="font-size:14px;">
+      https://www.youtube.com/watch?v=zLSM5IDC_X0  
+      <br>
+      <span style="color:#777;">(30 seconds, or search "Jouvella Automated Systems" on YouTube)</span>
     </p>
 
     <p>
@@ -157,7 +155,7 @@ html: `
           jouvelladigital.com
         </a><br>
 
-        🔗 <a href="www.linkedin.com/in/paul-matthew-5277b6305"
+        🔗 <a href="https://www.linkedin.com/in/paul-matthew-5277b6305"
               style="color:#666; text-decoration:none;">
           LinkedIn
         </a><br><br>
@@ -182,19 +180,27 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
     // subject: `Should I close the loop?`,
     inReplyTo: threadId,
     subject: `Re: Quick question about ${businessName}`,
-    inReplyTo: threadId,
     references: [threadId],
   html: `
   <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
     <p>Hi ${leadName},</p>
 
-    <p>I haven't heard back, so I'll pause outreach on my end.</p>
+    <p>I haven’t heard back, so I’ll pause outreach on my end.</p>
 
-    <p><strong> If improving inquiry follow-ups or reducing manual admin</strong> isn’t a focus right now, totally understand.</p>
+    <p>
+    I work with med spas to add simple automation around their existing website or booking software, 
+    mainly to follow up with inquiries, re-engage past clients, and reduce manual admin.
+    </p>
 
-    <p>If it is, I’m happy to share how this works for clinics with different booking or send pricing.</p>
+    <p>
+    If improving follow-ups or client retention isn’t a focus right now, totally understand.
+    </p>
 
-    <p>Thanks either way<p>
+    <p>
+    If it is, I’m happy to share how this works with different booking tools, or send pricing.
+    </p>
+
+    <p>Thanks either way.</p>
 
     <div style="display:flex; align-items:center; font-family:Arial, sans-serif; font-size:12px; color:#666; line-height:1.4; margin-top:16px;">
       
@@ -220,7 +226,7 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
           jouvelladigital.com
         </a><br>
 
-        🔗 <a href="www.linkedin.com/in/paul-matthew-5277b6305"
+        🔗 <a href="https://www.linkedin.com/in/paul-matthew-5277b6305"
               style="color:#666; text-decoration:none;">
           LinkedIn
         </a><br><br>
