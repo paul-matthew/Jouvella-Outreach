@@ -11,93 +11,92 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export async function sendInitialEmail({ to, businessName, leadName, recordId }) {
+export async function sendInitialEmail({ to, businessName, leadName, id }) {
   const mailOptions = {
     from: `"Paul Matthew | Jouvella Digital" <${process.env.GMAIL_USER}>`,
     to,
     subject: `Quick question about ${businessName}`,
-html: `
-  <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
-    <p>Hi ${leadName},</p>
+    html: `
+      <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
+        <p>Hi ${leadName},</p>
 
-    <p>
-      Happy New Year🎉
-    </p>
+        <p>
+          Happy New Year🎉
+        </p>
 
-    <p>
-      If someone reaches out but doesn’t book right away, do you ever hear from them again?
-    </p>
+        <p>
+          If someone reaches out but doesn’t book right away, do you ever hear from them again?
+        </p>
 
-    <p>
-      Most med spas lose revenue because interested people never get turned into booked or returning clients.
-    </p>
+        <p>
+          Most med spas lose revenue because interested people never get turned into booked or returning clients.
+        </p>
 
-    <p>
-      That’s what we install: <strong>simple automated follow-ups, reminders, promotions alerts and much more</strong>. 
-      Our services are designed to be integrated into your existing website or booking software.
-    </p>
+        <p>
+          That’s what we install: <strong>simple automated follow-ups, reminders, promotions alerts and much more</strong>. 
+          Our services are designed to be integrated into your existing website or booking software.
+        </p>
 
-    <p style="margin:16px 0 8px;">
-      Here’s a short demo highlighting the gap we commonly see in med spas:
-    </p>
+        <p style="margin:16px 0 8px;">
+          Here’s a short demo highlighting the gap we commonly see in med spas:
+        </p>
 
-    <p style="font-size:14px;">
-      <a
-        href="https://jouvella-automations.netlify.app/.netlify/functions/click?id=${recordId}"
-        target="_blank"
-      >
-        https://www.youtube.com/watch?v=zLSM5IDC_X0
-      </a>
-      <br>
-      <span style="color:#777;">
-        (30 seconds, or search "Jouvella Automated Systems" on YouTube)
-      </span>
-    </p>
+        <p style="font-size:14px;">
+          <a
+            href="https://jouvella-automations.netlify.app/.netlify/functions/click?id=${id}"
+            target="_blank"
+          >
+            https://www.youtube.com/watch?v=zLSM5IDC_X0
+          </a>
+          <br>
+          <span style="color:#777;">
+            (30 seconds, or search "Jouvella Automated Systems" on YouTube)
+          </span>
+        </p>
 
-    <p>
-      I’m accepting <strong>2 new med spa clients this month</strong>.
-    </p>
+        <p>
+          I’m accepting <strong>2 new med spa clients this month</strong>.
+        </p>
 
-    <p>
-      Happy to show what this could look like for <strong>${businessName}</strong>.
-    </p>
+        <p>
+          Happy to show what this could look like for <strong>${businessName}</strong>.
+        </p>
 
-    <div style="display:flex; align-items:center; font-family:Arial, sans-serif; font-size:12px; color:#666; line-height:1.4; margin-top:16px;">
-      
-      <!-- Profile Image -->
-      <img
-        src="https://jouvella.netlify.app/images/PM.jpeg"
-        alt="Paul Matthew"
-        width="60"
-        height="60"
-        style="border-radius:50%; margin-right:12px; object-fit:cover;"
-      />
+        <div style="display:flex; align-items:center; font-family:Arial, sans-serif; font-size:12px; color:#666; line-height:1.4; margin-top:16px;">
+          
+          <!-- Profile Image -->
+          <img
+            src="https://jouvella.netlify.app/images/PM.jpeg"
+            alt="Paul Matthew"
+            width="60"
+            height="60"
+            style="border-radius:50%; margin-right:12px; object-fit:cover;"
+          />
 
-      <!-- Text Content -->
-      <div>
-        <strong style="font-size:13px; color:#333;">Paul Matthew</strong><br>
-        Project Manager | Jouvella Digital<br><br>
+          <!-- Text Content -->
+          <div>
+            <strong style="font-size:13px; color:#333;">Paul Matthew</strong><br>
+            Project Manager | Jouvella Digital<br><br>
 
-        📧 <a href="mailto:jouvelladigital@gmail.com" style="color:#666; text-decoration:none;">
-          jouvelladigital@gmail.com
-        </a><br>
+            📧 <a href="mailto:jouvelladigital@gmail.com" style="color:#666; text-decoration:none;">
+              jouvelladigital@gmail.com
+            </a><br>
 
-        🌐 <a href="https://jouvella.netlify.app" style="color:#666; text-decoration:none;">
-          jouvelladigital.com
-        </a><br>
+            🌐 <a href="https://jouvella.netlify.app" style="color:#666; text-decoration:none;">
+              jouvelladigital.com
+            </a><br>
 
-        🔗 <a href="https://www.linkedin.com/in/paul-matthew-5277b6305"
-              style="color:#666; text-decoration:none;">
-          LinkedIn
-        </a><br><br>
+            🔗 <a href="https://www.linkedin.com/in/paul-matthew-5277b6305"
+                  style="color:#666; text-decoration:none;">
+              LinkedIn
+            </a><br><br>
 
-        <em>Your med spa’s growth, simplified.</em>
+            <em>Your med spa’s growth, simplified.</em>
+          </div>
+        </div>
+
       </div>
-    </div>
-
-  </div>
-`
-
+    `
   };
 
   const info = await transporter.sendMail(mailOptions);
