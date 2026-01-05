@@ -136,9 +136,16 @@ html: `
     </p>
 
     <p style="font-size:14px;">
-      https://www.youtube.com/watch?v=zLSM5IDC_X0  
+      <a
+        href="https://jouvella-automations.netlify.app/.netlify/functions/click?id=${id}"
+        target="_blank"
+      >
+        https://www.youtube.com/watch?v=zLSM5IDC_X0
+      </a>
       <br>
-      <span style="color:#777;">(30 seconds, or search "Jouvella Automated Systems" on YouTube)</span>
+      <span style="color:#777;">
+        (30 seconds, or search "Jouvella Automated Systems" on YouTube)
+      </span>
     </p>
 
     <p>
@@ -177,6 +184,13 @@ html: `
         <em>Your med spa’s growth, simplified.</em>
       </div>
     </div>
+    <img
+      src="https://jouvella-automations.netlify.app/.netlify/functions/open?id=${id}"
+      width="1"
+      height="1"
+      style="display:none;"
+      alt=""
+    />
   </div>
   `
 
@@ -248,6 +262,13 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
         <em>Your med spa’s growth, simplified.</em>
       </div>
     </div>
+    <img
+      src="https://jouvella-automations.netlify.app/.netlify/functions/open?id=${id}"
+      width="1"
+      height="1"
+      style="display:none;"
+      alt=""
+    />
   </div>
 `
 
