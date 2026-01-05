@@ -91,6 +91,7 @@ async function runFollowup() {
         to: lead.email,
         businessName: lead.businessName,
         leadName: lead.leadName,
+        id: lead.id,
         threadId: lead.threadId,
         subject: lead.originalSubject || `Helping ${lead.businessName} Get More Bookings`, // fallback
       });
