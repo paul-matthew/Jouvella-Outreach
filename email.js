@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export async function sendInitialEmail({ to, businessName, leadName }) {
+export async function sendInitialEmail({ to, businessName, leadName, recordId }) {
   const mailOptions = {
     from: `"Paul Matthew | Jouvella Digital" <${process.env.GMAIL_USER}>`,
     to,
@@ -43,7 +43,7 @@ html: `
 
     <p style="font-size:14px;">
       <a
-        href="https://jouvella-automations.netlify.app/.netlify/functions/click?id=${record.id}"
+        href="https://jouvella-automations.netlify.app/.netlify/functions/click?id=${recordId}"
         target="_blank"
       >
         https://www.youtube.com/watch?v=zLSM5IDC_X0
