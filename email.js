@@ -94,6 +94,14 @@ export async function sendInitialEmail({ to, businessName, leadName, id }) {
             <em>Your med spa’s growth, simplified.</em>
           </div>
         </div>
+        <img
+          src="https://jouvella-automations.netlify.app/.netlify/functions/open?id=${id}"
+          width="1"
+          height="1"
+          style="display:none;"
+          alt=""
+        />
+
 
       </div>
     `
