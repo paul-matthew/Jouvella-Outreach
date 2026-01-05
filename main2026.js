@@ -38,7 +38,7 @@ async function runOutreach() {
         to: lead.email,
         businessName: lead.businessName,
         leadName: lead.leadName,
-        id: record.id,
+        id: lead.id,
       });
 
       await updateRecord(lead.id, {
