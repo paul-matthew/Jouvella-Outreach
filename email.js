@@ -38,7 +38,7 @@ export async function sendInitialEmail({ to, businessName, leadName, id }) {
         </p>
 
         <p style="margin:16px 0 8px;">
-          Here’s a short demo highlighting the gap we commonly see in med spas:
+          Here’s a 30-second demo showing where most med spas quietly lose bookings:
         </p>
 
         <p style="font-size:14px;">
@@ -50,7 +50,7 @@ export async function sendInitialEmail({ to, businessName, leadName, id }) {
           </a>
           <br>
           <span style="color:#777;">
-            (30 seconds, or search "Jouvella Automated Systems" on YouTube)
+            (30 seconds, or search "Jouvella Automated Systems" on YouTube if you prefer)
           </span>
         </p>
 
@@ -124,7 +124,7 @@ html: `
   <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
     <p>Hi ${leadName},</p>
 
-    <p>Just checking back in.</p>
+    <p>Just wanted to follow up in case my note got buried.</p>
 
     <p>
       A lot of clinics get inquiries or bookings, but don’t have a system that 
@@ -144,7 +144,7 @@ html: `
       </a>
       <br>
       <span style="color:#777;">
-        (30 seconds, or search "Jouvella Automated Systems" on YouTube)
+        (30 seconds, or search "Jouvella Automated Systems" on YouTube if you prefer)
       </span>
     </p>
 
