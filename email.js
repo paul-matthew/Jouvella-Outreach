@@ -18,7 +18,7 @@ export async function sendInitialEmail({ to, businessName, leadName, id }) {
     subject: `Quick question about ${businessName}`,
     html: `
       <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
-        <p>Hi ${businessName} Team,</p>
+        <p>Hi <strong>${businessName}</strong> Team,</p>
 
         <p>
           Happy New Year🎉
@@ -122,7 +122,7 @@ export async function sendFollowUpEmail({ to, threadId, businessName, leadName, 
     subject: `Re: Quick question about ${businessName}`,  
 html: `
   <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
-    <p>Hi ${businessName} Team,</p>
+    <p>Hi <strong>${businessName}</strong> Team,</p>
 
     <p>Just wanted to follow up in case my note got buried.</p>
 
@@ -211,7 +211,7 @@ export async function send2ndFollowUpEmail({ to, threadId, businessName, leadNam
     references: [threadId],
   html: `
   <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; padding:10px;">
-    <p>Hi ${businessName} Team,</p>
+    <p>Hi <strong>${businessName}</strong> Team,</p>
 
     <p>I haven’t heard back, so I’ll pause outreach on my end.</p>
 
